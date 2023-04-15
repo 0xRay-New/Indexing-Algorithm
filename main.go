@@ -59,6 +59,8 @@ func main() {
 				})
 			}
 		}
+
+		// indexes NFTs by metadata
 		data.CheckFirstIndex()
 		data.GetAssetsRequest()
 		data.SortNFTS()
@@ -66,6 +68,8 @@ func main() {
 			data.NFTScores[data.SortedNFTScores[i].TokenID]["r"] = i+1
 		}
 		common.IndexedCollections = append(common.IndexedCollections, collectionName)
+
+		// brotli encodes collection to decrease database storage usage
 		d, _ := json.Marshal(data.NFTScores)
 		var b bytes.Buffer
 		w := brotli.NewWriter(&b)
